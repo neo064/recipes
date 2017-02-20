@@ -2,7 +2,7 @@
 Recipe managing system
 
 Recipes
-Project descriptionWeb application to manage cooking recipes defined by a title, ingredients, steps, a photo, an embedded URL video, preparation time, cooking time.
+Web application to manage cooking recipes defined by a title, ingredients, steps, a photo, an embedded URL video, preparation time, cooking time.
 
 Functionalities :
 - Add /modify a recipe (in progress)
