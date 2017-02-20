@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org">
+<head>
+<meta charset="utf-8" />
+<title>Apache Wicket Quickstart</title>
+<link
+	href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:regular,bold'
+	rel='stylesheet' type='text/css' />
+<link
+	href="https://fonts.googleapis.com/css?family=Lato:100,200,300,400"
+	rel="stylesheet">
+<link
+	href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"
+	rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="styles/jquery-ui-themes-1.12.1/jquery-ui.min.css" />
+<link rel="stylesheet" href="styles/style.css" type="text/css" media="screen"
+	title="Stylesheet" />
+</head>
+<body>
+	<div id="banner" class="divborder">
+		<h1>
+			Chez GG
+			<!-- 			<span id="bannerTitle">Chez GG</span> -->
+		</h1>
+	</div>
+	<div id="menu" class="divborder">
+		<nav id="mainmenu">
+			<ul>
+				<li><a href="#" id="addmenu" wicket:id="addmenu">+</a></li>
+				<li><a href="#" id="recipesmenu" wicket:id="recipesmenu">Recettes</a></li>
+				<li><a href="#" id="tipsmenu" wicket:id="tipsmenu">Astuces</a></li>
+				<li id="lisearch">
+					<div id="blocksearch">
+						<span class="icon"><i class="fa fa-search"></i></span> <input
+							wicket:id="search"
+							 id="search" placeholder="Rechercher..." autocomplete="off" />
+					</div>
+				</li>
+			</ul>
+		</nav>
+	</div>
+	<div id="content" class="divborder">
+		<div id="contentmargin">
+			<wicket:child />
+		</div>
+	</div>
+</body>
+</html>

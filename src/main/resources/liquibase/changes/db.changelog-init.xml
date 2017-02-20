@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd 
+   http://www.liquibase.org/xml/ns/dbchangelog 
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+
+	<changeSet author="jag" id="changelog-init-create">
+		<createTable tableName="FoodProduct">
+			<column name="id" type="bigint" autoIncrement="true">
+				<constraints nullable="false" primaryKey="true" unique="true" />
+			</column>
+			<column name="creationDate" type="timestamp" 
+				defaultValueDate="CURRENT_TIMESTAMP">
+				<constraints nullable="false" />
+			</column>
+			<column name="modificationDate" type="timestamp"
+				defaultValueDate="CURRENT_TIMESTAMP">
+				<constraints nullable="false" />
+			</column>
+			<column name="name" type="varchar(50)">
+				<constraints nullable="false" />
+			</column>
+			<column name="density" type="float"/>
+			<column name="comment" type="clob" />
+		</createTable>
+		<createIndex indexName="idx_foodproduct_name" tableName="FoodProduct">
+			<column name="name" />
+		</createIndex>
+		<createTable tableName="Unit">
+			<column name="id" type="bigint" autoIncrement="true">
+				<constraints nullable="false" primaryKey="true" unique="true" />
+			</column>
+			<column name="creationDate" type="timestamp"
+				defaultValueDate="CURRENT_TIMESTAMP">
+				<constraints nullable="false" />
+			</column>
+			<column name="modificationDate" type="timestamp"
+				defaultValueDate="CURRENT_TIMESTAMP">
+				<constraints nullable="false" />
+			</column>
+			<column name="name" type="varchar(50)" />
+			<column name="code" type="varchar(20)">
+				<constraints nullable="false" />
+			</column>
+			<column name="abbreviation" type="varchar(10)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		<createIndex indexName="idx_unit_code" tableName="Unit">
+			<column name="code" />
+		</createIndex>
+		<createTable tableName="Step">
+			<column name="id" type="bigint" autoIncrement="true">
+				<constraints nullable="false" primaryKey="true" unique="true" />
+			</column>
+			<column name="creationDate" type="timestamp"
+				defaultValueDate="CURRENT_TIMESTAMP">
+				<constraints nullable="false" />
+			</column>
+			<column name="modificationDate" type="timestamp"
+				defaultValueDate="CURRENT_TIMESTAMP">
+				<constraints nullable="false" />
+			</column>
+			<column name="number" type="tinyint unsigned">
+				<constraints nullable="false" />
+			</column>
+			<column name="title" type="varchar(50)" />
+			<column name="description" type="clob" />
+			<column name="recipe_id" type="bigint">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		<createTable tableName="Ingredient">
+			<column name="id" type="bigint" autoIncrement="true">
+				<constraints nullable="false" primaryKey="true" unique="true" />
+			</column>
+			<column name="creationDate" type="timestamp"
+				defaultValueDate="CURRENT_TIMESTAMP">
+				<constraints nullable="false" />
+			</column>
+			<column name="modificationDate" type="timestamp"
+				defaultValueDate="CURRENT_TIMESTAMP">
+				<constraints nullable="false" />
+			</column>
+			<column name="number" type="tinyint unsigned">
+				<constraints nullable="false" />
+			</column>
+			<column name="quantity" type="float unsigned">
+				<constraints nullable="false" />
+			</column>
+			<column name="recipe_id" type="bigint">
+				<constraints nullable="false" />
+			</column>
+			<column name="foodProduct_id" type="bigint">
+				<constraints nullable="false" />
+			</column>
+			<column name="unit_id" type="bigint">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		<createTable tableName="Recipe">
+			<column name="id" type="bigint" autoIncrement="true">
+				<constraints nullable="false" primaryKey="true" unique="true" />
+			</column>
+			<column name="creationDate" type="timestamp"
+				defaultValueDate="CURRENT_TIMESTAMP">
+				<constraints nullable="false" />
+			</column>
+			<column name="modificationDate" type="timestamp"
+				defaultValueDate="CURRENT_TIMESTAMP">
+				<constraints nullable="false" />
+			</column>
+			<column name="title" type="varchar(50)">
+				<constraints nullable="false" />
+			</column>
+			<column name="preparationTime" type="smallint unsigned" />
+			<column name="cookingTime" type="smallint unsigned" />
+			<column name="videoURL" type="varchar(2000)" />
+			<column name="comment" type="clob" />
+			<column name="photo" type="longblob"></column>
+		</createTable>
+		<createTable tableName="Conversion">
+			<column name="id" type="bigint" autoIncrement="true">
+				<constraints nullable="false" primaryKey="true" unique="true" />
+			</column>
+			<column name="creationDate" type="timestamp"
+				defaultValueDate="CURRENT_TIMESTAMP">
+				<constraints nullable="false" />
+			</column>
+			<column name="modificationDate" type="timestamp"
+				defaultValueDate="CURRENT_TIMESTAMP">
+				<constraints nullable="false" />
+			</column>
+			<column name="from_id" type="bigint">
+				<constraints nullable="false" />
+			</column>
+			<column name="conversionValue" type="double(10) unsigned" />
+		</createTable>
+		<addForeignKeyConstraint baseColumnNames="recipe_id"
+			baseTableName="Step" constraintName="fk_step_recipe" onDelete="CASCADE"
+			referencedColumnNames="id" referencedTableName="Recipe" />
+		<addForeignKeyConstraint baseColumnNames="recipe_id"
+			baseTableName="Ingredient" constraintName="fk_ingredient_recipe"
+			onDelete="CASCADE" referencedColumnNames="id" referencedTableName="Recipe" />
+		<addForeignKeyConstraint baseColumnNames="foodProduct_id"
+			baseTableName="Ingredient" constraintName="fk_ingredient_foodproduct"
+			onDelete="CASCADE" referencedColumnNames="id" referencedTableName="FoodProduct" />
+		<addForeignKeyConstraint baseColumnNames="unit_id"
+			baseTableName="Ingredient" constraintName="fk_ingredient_unit"
+			onDelete="CASCADE" referencedColumnNames="id" referencedTableName="Unit" />
+		<addForeignKeyConstraint baseColumnNames="from_id"
+			baseTableName="Conversion" constraintName="fk_conversion_unit"
+			onDelete="CASCADE" referencedColumnNames="id" referencedTableName="Unit" />
+	</changeSet>
+	<changeSet id="changelog-mysql-datemodification-columns" author="jag" dbms="mysql">
+		<sqlFile path="liquibase/changes/sqlfiles/mysql/alterModificationDate.sql"/>
+	</changeSet>
+	<changeSet id="changelog-init-insert" author="jag">
+		<insert tableName="unit">
+			<column name="id">1</column>
+			<column name="name">Teaspoon</column>
+			<column name="code">TSP</column>
+			<column name="abbreviation">tsp.</column>
+		</insert>
+		<insert tableName="unit">
+			<column name="id">2</column>
+			<column name="name">Tablespoon</column>
+			<column name="code">TBSP</column>
+			<column name="abbreviation">Tbsp.</column>
+		</insert>
+		<insert tableName="unit">
+			<column name="id">3</column>
+			<column name="name">Fluid once</column>
+			<column name="code">FLOZ</column>
+			<column name="abbreviation">fl. oz.</column>
+		</insert>
+		<insert tableName="unit">
+			<column name="id">4</column>
+			<column name="name">Cup</column>
+			<column name="code">CUP</column>
+			<column name="abbreviation">Cup</column>
+		</insert>
+		<insert tableName="unit">
+			<column name="id">5</column>
+			<column name="name">Pint</column>
+			<column name="code">PINT</column>
+			<column name="abbreviation">pt.</column>
+		</insert>
+		<insert tableName="unit">
+			<column name="id">6</column>
+			<column name="name">Millilitre</column>
+			<column name="code">MILLILITRE</column>
+			<column name="abbreviation">ml</column>
+		</insert>
+		<insert tableName="unit">
+			<column name="id">7</column>
+			<column name="name">Litre</column>
+			<column name="code">LITRE</column>
+			<column name="abbreviation">l</column>
+		</insert>
+		<insert tableName="unit">
+			<column name="id">8</column>
+			<column name="name">Gramme</column>
+			<column name="code">GRAMME</column>
+			<column name="abbreviation">g</column>
+		</insert>
+		<insert tableName="unit">
+			<column name="id">9</column>
+			<column name="name">Kilogramme</column>
+			<column name="code">KILOGRAMME</column>
+			<column name="abbreviation">kg</column>
+		</insert>
+		<insert tableName="unit">
+			<column name="id">10</column>
+			<column name="name">Unité</column>
+			<column name="code">UNIT</column>
+			<column name="abbreviation">Unité(s)</column>
+		</insert>
+		<insert tableName="foodproduct">
+			<column name="name">Sucre</column>
+			<column name="density">1.2</column>
+		</insert>
+		<insert tableName="foodproduct">
+			<column name="name">Farine</column>
+			<column name="density">0.7</column>
+		</insert>
+		<insert tableName="foodproduct">
+			<column name="name">Sel</column>
+			<column name="density">1.2</column>
+		</insert>
+		<insert tableName="foodproduct">
+			<column name="name">Beurre</column>
+			<column name="density">0.9</column>
+		</insert>
+		<insert tableName="conversion">
+			<column name="from_id">1</column>
+			<column name="conversionValue">4.92892</column>
+		</insert>
+		<insert tableName="conversion">
+			<column name="from_id">2</column>
+			<column name="conversionValue">14.7868</column>
+		</insert>
+		<insert tableName="conversion">
+			<column name="from_id">4</column>
+			<column name="conversionValue">236.588</column>
+		</insert>
+		<insert tableName="conversion">
+			<column name="from_id">5</column>
+			<column name="conversionValue">473.176</column>
+		</insert>
+		<insert tableName="conversion">
+			<column name="from_id">6</column>
+			<column name="conversionValue">1</column>
+		</insert>
+		<insert tableName="conversion">
+			<column name="from_id">7</column>
+			<column name="conversionValue">1000</column>
+		</insert>
+		<insert tableName="conversion">
+			<column name="from_id">8</column>
+			<column name="conversionValue">1</column>
+		</insert>
+		<insert tableName="conversion">
+			<column name="from_id">9</column>
+			<column name="conversionValue">1000</column>
+		</insert>
+	</changeSet>
+</databaseChangeLog>

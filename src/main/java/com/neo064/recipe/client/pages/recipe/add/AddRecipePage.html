@@ -1,0 +1,97 @@
+<html xmlns:wicket="http://wicket.apache.org/">
+<body>
+	<wicket:extend>
+		<form wicket:id="form" id="form">
+			<div class="container titlecontainer">
+				<h1 class="title">
+					<input wicket:id="title" type="text" class="title modifytitle"
+						placeholder="Titre" autocomplete="off" />
+				</h1>
+				<input wicket:id="savebtn" type="submit" class="modifysavebutton"
+					value="Sauvegarder" />
+			</div>
+			<div wicket:id="titleFeedback"></div>
+			<div class="imagepanel">
+				<div class="recipeimagecontainer">
+					<span wicket:id="image"></span>
+					<span wicket:id="photoUpload"></span>
+				</div>
+<!-- 				<input wicket:id="photoUpload" type="file" class="jagUpload" /> -->
+				<div id="additionalinfo">
+					<span wicket:id="preparationTime">[preparationTime]</span> <span
+						wicket:id="cookingTime">[cookingTime]</span> <input
+						wicket:id="videoURL" type="text" placeholder="URL Video" class="videourl"
+						autocomplete="off" />
+<!-- 						<span wicket:id="test"></span> -->
+				</div>
+			</div>
+			<div class="container">
+				<div class="container">
+					<h2>Ingrédients</h2>
+				</div>
+				<div class="container">
+					<div wicket:id="ingredientRowPanel">
+						<ul wicket:id="ingredientList" class="stepList">
+							<li wicket:id="ingredients" class="row ingredient cursormove">
+								<div wicket:id="feedbackIngredientContainer"
+									class="rowcontainer ingredientcontainer">
+									<div class="removeingredient">
+										<a href="#" wicket:id="removeingredient"
+											class="button ingredient remove"></a>
+									</div>
+									<div class="qtyingredient">
+										<input wicket:id="quantity" type="number" class="fill"
+											placeholder="Quantité"></input>
+									</div>
+									<div class="unit edit">
+										<select wicket:id="unit"></select>
+									</div>
+									<div>
+										<input type="text" wicket:id="foodProduct" class="fill"
+											placeholder="Produit">
+									</div>
+									<div wicket:id="feedbackIngredient"></div>
+								</div>
+							</li>
+							<li id="addsteprow">
+								<div class="addcontainer">
+									<a href="#" wicket:id="addingredient"
+										class="button ingredient add"></a>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="container">
+				<div class="container">
+					<h2>Étapes</h2>
+				</div>
+				<div class="container">
+					<div wicket:id="stepRowPanel">
+						<ul wicket:id="stepList" class="stepList">
+							<li wicket:id="steps" class="row step cursormove">
+								<div wicket:id="feedbackStepContainer" class="rowcontainer stepcontainer">
+									<div class="removestep">
+										<a href="#" wicket:id="removestep" class="button step remove"></a>
+									</div>
+									<div class="stepdescription">
+										<textarea wicket:id="description" class="steptextdescription"
+											placeholder="Description"></textarea>
+									</div>
+									<div wicket:id="feedbackStep"></div>
+								</div>
+							</li>
+							<li id="addsteprow">
+								<div class="addcontainer">
+									<a href="#" wicket:id="addstep" class="button step add"></a>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</form>
+	</wicket:extend>
+</body>
+</html>

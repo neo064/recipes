@@ -1,0 +1,61 @@
+<html xmlns:wicket="http://wicket.apache.org/">
+<body>
+	<wicket:extend>
+		<form wicket:id="form">
+			<div class="container titlecontainer">
+				<h1 class="title">
+					<span wicket:id="title"></span>
+				</h1>
+				<input wicket:id="modifybtn" type="submit" class="modifysavebutton"
+					value="Modifier" />
+			</div>
+			<div class="imagepanel">
+				<div class="recipeimagecontainer">
+					<span wicket:id="image"></span>
+				</div>
+				<div id="additionalinfo">
+					<span wicket:id="preparationTime">[preparationTime]</span>
+					<span wicket:id="cookingTime">[cookingTime]</span>
+				</div>
+				<div id="videocontainer">
+					<iframe wicket:id="videoURL" id="embeddedvideo" frameborder="0" allowfullscreen></iframe>  
+				</div>
+			</div>
+			<div class="container">
+				<div class="container">
+					<h2>Ingrédients</h2>
+				</div>
+				<div class="container">
+					<ul class="stepList">
+						<li wicket:id="ingredients" class="row">
+							<div class="qtyingredientview">
+								<span wicket:id="quantity" class="fill"></span>
+							</div>
+							<div class="unit view">
+								<span wicket:id="unit"></span>
+							</div>
+							<div>
+								<span wicket:id="foodProduct" class="fill"></span>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="container">
+				<div class="container">
+					<h2>Étapes</h2>
+				</div>
+				<div class="container">
+					<ul class="stepList">
+						<li wicket:id="steps" class="row">
+							<div class="stepdescription">
+								<span wicket:id="description" class="steptextdescription"></span>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</form>
+	</wicket:extend>
+</body>
+</html>

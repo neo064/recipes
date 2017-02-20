@@ -1,0 +1,26 @@
+<html xmlns:wicket="http://wicket.apache.org/">
+<body>
+	<wicket:extend>
+		<div class="searchresults">
+			<table class="searchtable">
+				<tr wicket:id="simple" class="searchrow">
+					<td class="imagetd">
+							<span wicket:id="image">[photo]</span>
+						</td>
+					<td class="titletd"><div wicket:id="recipecontainer"
+							class="titlesearch">
+							<ul class="keywordsearch titlesearch"><li wicket:id="title"></li></ul>
+<!-- 							<span wicket:id="title">[title]</span> -->
+							 <ul class="keywordsearch productsearch"><li wicket:id="products"></li></ul>
+<!-- 							 <span wicket:id="products" -->
+<!-- 								class="searchproducts">[products]</span> -->
+						</div></td>
+				</tr>
+			</table>
+			<div class="searchpagination">
+				<span wicket:id="navigator">[dataview navigator]</span>
+			</div>
+		</div>
+	</wicket:extend>
+</body>
+</html>

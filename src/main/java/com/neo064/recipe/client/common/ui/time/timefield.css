@@ -1,0 +1,17 @@
+.tfcontainer {
+	display: flex;
+}
+
+.tflabel {
+	width: 15rem;
+}
+
+.tfverticalalign {
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
+.tfnumber {
+	margin-left: 0.3rem;
+	margin-right: 0.3rem;
+}
